@@ -1,0 +1,8 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ListView xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>Registration_And_Licensing_team_Onboard_Request</fullName>
+    <columns>NAME</columns>
+    <filterScope>Queue</filterScope>
+    <label>Registration &amp; Licensing Team - Revamp</label>
+    <queue>Registration_And_Licensing_team</queue>
+</ListView>

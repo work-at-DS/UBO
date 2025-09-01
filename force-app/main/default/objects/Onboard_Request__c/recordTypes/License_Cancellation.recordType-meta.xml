@@ -1,0 +1,734 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<RecordType xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>License_Cancellation</fullName>
+    <active>true</active>
+    <label>License Cancellation</label>
+    <picklistValues>
+        <picklist>Active_Operating_Location__c</picklist>
+        <values>
+            <fullName>Sub Lease</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Third Party</fullName>
+            <default>false</default>
+        </values>
+    </picklistValues>
+    <picklistValues>
+        <picklist>Air_Freight__c</picklist>
+        <values>
+            <fullName>Year 1- 2%2C200</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Year 2- 2%2C500</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Year 3- 2%2C700</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Year 4- 2%2C900</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Year 5- 3%2C100</fullName>
+            <default>false</default>
+        </values>
+    </picklistValues>
+    <picklistValues>
+        <picklist>Branch_Type__c</picklist>
+        <values>
+            <fullName>14</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>15</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>17</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>6</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>9</fullName>
+            <default>false</default>
+        </values>
+    </picklistValues>
+    <picklistValues>
+        <picklist>Business_Entity__c</picklist>
+        <values>
+            <fullName>DWC-Branch</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>DWC-LLC</fullName>
+            <default>false</default>
+        </values>
+    </picklistValues>
+    <picklistValues>
+        <picklist>CSCS_Partially_Approved__c</picklist>
+        <values>
+            <fullName>No</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Yes</fullName>
+            <default>false</default>
+        </values>
+    </picklistValues>
+    <picklistValues>
+        <picklist>Card_Access_Duration__c</picklist>
+        <values>
+            <fullName>1 month</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>1 week</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>1 year</fullName>
+            <default>false</default>
+        </values>
+    </picklistValues>
+    <picklistValues>
+        <picklist>Card_Applicant_Nationality__c</picklist>
+        <values>
+            <fullName>Australian</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Bangladeshi</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Chinese</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>French</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Indian</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Portugese</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Spain</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Srilankan</fullName>
+            <default>false</default>
+        </values>
+    </picklistValues>
+    <picklistValues>
+        <picklist>Company_Exist_In_Dubai_South__c</picklist>
+        <values>
+            <fullName>No</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Yes</fullName>
+            <default>false</default>
+        </values>
+    </picklistValues>
+    <picklistValues>
+        <picklist>DCAA_Approval_Required__c</picklist>
+        <values>
+            <fullName>No</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Yes</fullName>
+            <default>false</default>
+        </values>
+    </picklistValues>
+    <picklistValues>
+        <picklist>DCAA_Current_Status__c</picklist>
+        <values>
+            <fullName>Company Exists</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Company Not Exists</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Documents upload Callout Error</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Documents upload Success</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Get Company Callout Error</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Missing Data in Salesforce</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Permit Issued</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Permit Request Callout Error</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Permit Request Success</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Save New Company Callout Error</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Save New Company Success</fullName>
+            <default>false</default>
+        </values>
+    </picklistValues>
+    <picklistValues>
+        <picklist>EC_Applicable__c</picklist>
+        <values>
+            <fullName>No</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Yes</fullName>
+            <default>false</default>
+        </values>
+    </picklistValues>
+    <picklistValues>
+        <picklist>External_Activity_Applicable__c</picklist>
+        <values>
+            <fullName>No</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Yes</fullName>
+            <default>false</default>
+        </values>
+    </picklistValues>
+    <picklistValues>
+        <picklist>Financial_Period__c</picklist>
+        <values>
+            <fullName>2023</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>2024</fullName>
+            <default>false</default>
+        </values>
+    </picklistValues>
+    <picklistValues>
+        <picklist>Financial_Year__c</picklist>
+        <values>
+            <fullName>2023</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>2024</fullName>
+            <default>false</default>
+        </values>
+    </picklistValues>
+    <picklistValues>
+        <picklist>GDRFA_API_Status__c</picklist>
+        <values>
+            <fullName>Application Status Enquiry</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Documents Submitted</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>File Status Enquiry</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>GET Fee Complete</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>PAY Fee Complete</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Print Visa</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Request Submitted</fullName>
+            <default>false</default>
+        </values>
+    </picklistValues>
+    <picklistValues>
+        <picklist>Is_Visa_s_Cancelled__c</picklist>
+        <values>
+            <fullName>No</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Yes</fullName>
+            <default>false</default>
+        </values>
+    </picklistValues>
+    <picklistValues>
+        <picklist>Is_liquidator__c</picklist>
+        <values>
+            <fullName>No</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Yes</fullName>
+            <default>false</default>
+        </values>
+    </picklistValues>
+    <picklistValues>
+        <picklist>Lease_Cancelled__c</picklist>
+        <values>
+            <fullName>No</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Yes</fullName>
+            <default>false</default>
+        </values>
+    </picklistValues>
+    <picklistValues>
+        <picklist>Lease_Type__c</picklist>
+        <values>
+            <fullName>Office</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Retail</fullName>
+            <default>false</default>
+        </values>
+    </picklistValues>
+    <picklistValues>
+        <picklist>License_Renewal_for_years__c</picklist>
+        <values>
+            <fullName>1</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>2</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>3</fullName>
+            <default>false</default>
+        </values>
+    </picklistValues>
+    <picklistValues>
+        <picklist>License_Type_Group__c</picklist>
+        <values>
+            <fullName>Commercial</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Service</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Trading</fullName>
+            <default>false</default>
+        </values>
+    </picklistValues>
+    <picklistValues>
+        <picklist>Noqodi_Transaction_Status__c</picklist>
+        <values>
+            <fullName>Authorized</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Cancelled</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Captured</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Initiated</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Not Authorized</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Not Captured</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Not Pre Authorized</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Payment Received</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Pending</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Pre Authorized</fullName>
+            <default>false</default>
+        </values>
+    </picklistValues>
+    <picklistValues>
+        <picklist>Number_Of_Visas_Required__c</picklist>
+        <values>
+            <fullName>1-20</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>20-40</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>40-50</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Above 50</fullName>
+            <default>false</default>
+        </values>
+    </picklistValues>
+    <picklistValues>
+        <picklist>Obtaining_a_lease_from_Other_than_DS__c</picklist>
+        <values>
+            <fullName>No</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Yes</fullName>
+            <default>false</default>
+        </values>
+    </picklistValues>
+    <picklistValues>
+        <picklist>Reason_for_cancellation__c</picklist>
+        <values>
+            <fullName>High freezone fees</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>High lease amount</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>High license fee</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Others</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Relocating</fullName>
+            <default>false</default>
+        </values>
+    </picklistValues>
+    <picklistValues>
+        <picklist>Request_Sub_Type__c</picklist>
+        <values>
+            <fullName>New Access Card</fullName>
+            <default>false</default>
+        </values>
+    </picklistValues>
+    <picklistValues>
+        <picklist>Required_Lease_Duration__c</picklist>
+        <values>
+            <fullName>1 Year</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>2 Year</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>3 Year</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Other</fullName>
+            <default>false</default>
+        </values>
+    </picklistValues>
+    <picklistValues>
+        <picklist>Service_Type__c</picklist>
+        <values>
+            <fullName>Normal</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Urgent</fullName>
+            <default>false</default>
+        </values>
+    </picklistValues>
+    <picklistValues>
+        <picklist>Status__c</picklist>
+        <values>
+            <fullName>1st Contract Signature Completed</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>2nd Contract Signature Completed</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Applied in GDRFA</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Approved</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Awaiting Information</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Awaiting Re-upload</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Awaiting Stage 2 documents</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Canceled</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Change Status Requested</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Closed</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Collected</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Completed</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Contract Signature Completed</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Contract Signature Pending</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Contract Signature Pending%28Employee%29</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Customer Exit</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Document Re-uploaded</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Draft</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>End</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Entry Permit Issued</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Escalate to Legal</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Establishment Card Under Process</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>File Closed in GDRFA</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>File Permanent Closed</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>File a Case</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>GDRFA Approved</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>GDRFA Rejected</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>GDRFA Returned</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Get Fee From GDRFA</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Invalid</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Paid</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Pay in GDRFA</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Payment Received</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Pending CID Approval</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Pending Contract Signature</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Pending Penalty</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Pending Review</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Regenerate Contract</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Rejected</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Release Out Completed</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Release Out In Progress</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Reopened</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Required Information Updated</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Retry</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Return for more information</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Return to Back Office</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Return to Front Office</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Schedule a meeting</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Submitted</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Under Verification</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Upload Court Letter</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Waiting for Second Review</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Waiting for Third Review</fullName>
+            <default>false</default>
+        </values>
+    </picklistValues>
+    <picklistValues>
+        <picklist>Suspension_Period__c</picklist>
+        <values>
+            <fullName>1 Year</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>2 Years</fullName>
+            <default>false</default>
+        </values>
+    </picklistValues>
+    <picklistValues>
+        <picklist>Transferring_To_Authority_Name__c</picklist>
+        <values>
+            <fullName>Dubai Health Authority</fullName>
+            <default>false</default>
+        </values>
+    </picklistValues>
+    <picklistValues>
+        <picklist>X3rd_Party_Lease__c</picklist>
+        <values>
+            <fullName>Dubai Airport</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Emaar South</fullName>
+            <default>false</default>
+        </values>
+        <values>
+            <fullName>Mag5</fullName>
+            <default>false</default>
+        </values>
+    </picklistValues>
+</RecordType>

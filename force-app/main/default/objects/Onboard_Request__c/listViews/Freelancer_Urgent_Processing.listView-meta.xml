@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ListView xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>Freelancer_Urgent_Processing</fullName>
+    <columns>NAME</columns>
+    <columns>Account_Name__c</columns>
+    <columns>Request_Category_License__c</columns>
+    <columns>Status__c</columns>
+    <filterScope>Everything</filterScope>
+    <filters>
+        <field>RECORDTYPE</field>
+        <operation>equals</operation>
+        <value>Onboard_Request__c.Freelancer</value>
+    </filters>
+    <filters>
+        <field>Urgent_Processing__c</field>
+        <operation>equals</operation>
+        <value>1</value>
+    </filters>
+    <label>Freelancer - Urgent Processing</label>
+</ListView>

@@ -1,0 +1,520 @@
+<template>
+  <div class="container application">
+    
+        <!-- Toast -->
+        <c-ds_-portal-toast-lwc></c-ds_-portal-toast-lwc>
+    <div if:true={showSpinner}>
+      <div class="slds-p-around_x-large spinner-overlay">
+      <lightning-spinner alternative-text="Loading" size="large" class="slds-p-around_x-large spinner-overlay"></lightning-spinner>
+      </div>
+    </div>
+   <template lwc:if={showPPSpinner}>
+       <lightning-spinner alternative-text="Fetching Details" class="slds-p-around_x-large spinner-overlay spinner1"></lightning-spinner>
+    </template>
+    <template lwc:if={showSpinner1}>
+        <lightning-spinner alternative-text="Fetching Details" class="slds-p-around_x-large  spinner-overlay spinner2"></lightning-spinner>
+    </template>
+    <template if:false={isReqGenerated}>
+      <div class="slds-p-around_x-large spinner-overlay">
+        <lightning-spinner alternative-text="Loading" size="large"></lightning-spinner>
+      </div>
+    </template>
+    <!--template if:true={isShareHolderFome1}>
+    <template if:true={showRegisteredActivities}>
+        <h1 style="font-size:1.5em;">{addRegisteredActivities}</h1>
+        <div class="table-header1">	 
+          <strong>Main Activity</strong>          
+          <strong>Activity Code</strong>
+          <strong>Activity Name(English)</strong>
+          <strong>Activity Name(Arabic)</strong>
+          <strong>License Type</strong>
+        </div>
+        <div class="dashboard__table-rows">
+          <template lwc:if={registeredActivities} for:each={registeredActivities} for:item="obj" for:index="index">
+          <div key={obj.index} class="table-rows">
+          <span> <lightning-input type="checkbox" disabled='true' checked={obj.MainActivity}></lightning-input> </span>
+          <span> {obj.Name} </span>
+          <span> {obj.BusinessActivity} </span>
+          <span> {obj.BusinessActivityArabicName} </span>
+          <span> {obj.LicenseType} </span>
+          </div>
+          </template>
+        </div>
+      </template>
+      <br/>
+    </template-->
+    <template if:true={showShareHoldersData}>
+      <div class="dashboard__header-action slds-p-top_medium">
+        <c-ds_-portal-text-style-lwc text={dataTableName} tag="h2"></c-ds_-portal-text-style-lwc>
+      </div>
+      <c-ds_-on-boarding-data-table href="#" table-data={shareHolderMembersData} header-cols={sharedHoldersColumns} has-status="true" onrowaction={handleRowAction}></c-ds_-on-boarding-data-table>
+      <br/>
+    </template>
+    <!-- Share Capital information-->    
+    <template if:true={showShareCapital}>
+      <div style="float:right;">
+       <strong> Total Share Capital : {shareCapital} </strong> 
+      </div>
+      <br/> <br/>
+    </template>
+    <!--template if:true={showShareHoldersCorporateData}>
+      <div class="dashboard__header-action slds-p-top_medium">
+        <c-ds_-portal-text-style-lwc text="Corporate Shareholders" tag="h2"></c-ds_-portal-text-style-lwc>
+      </div>
+      <c-ds_-on-boarding-data-table href="#" table-data={shareHolderCorporatemembersData} header-cols={sharedHoldersColumns} has-status="true" onrowaction={handleRowAction}></c-ds_-on-boarding-data-table>
+    </template-->
+    <!--template if:true={showDirectorData}>
+      <div class="dashboard__header-action slds-p-top_medium">
+        <c-ds_-portal-text-style-lwc text={dataTableName} tag="h2"></c-ds_-portal-text-style-lwc>
+      </div>
+      <c-ds_-on-boarding-data-table href="#" table-data={membersData} header-cols={requiredActionsHeader} has-status="true" onrowaction={handleRowAction}></c-ds_-on-boarding-data-table>
+    </template-->
+    <template if:true={showShareHoldersData}>
+      <template if:false={showShareHoldersForm}>
+        <!--template if:false={hideAddBtnlabel}-->
+        <div style="padding: 10px" class="slds-align_absolute-center">
+          <!-- <lightning-button variant="brand" label="Add Additonal Shareholder"
+					onclick={addAdditionalShareHolder}></lightning-button> -->
+          <button class="details_start_button" onclick={addAdditionalShareHolder}>{addBtnlabel}</button>
+        </div>
+        <!--/template-->
+      </template>
+    </template>
+    <br />
+    <template if:true={showShareHoldersForm}>
+      <div>
+        <h1 style="font-size:1.5em;">{formHeader}</h1>
+      </div>
+    </template>
+    <c-ds_-portal-confirmation-box-lwc title={confirmationTitle} message={confirmationMessage} confirm-label="Yes" cancel-label="No" visible={isDialogVisible} name="confirmModal" onclick={getConfirmation}></c-ds_-portal-confirmation-box-lwc>
+    <c-ds_-portal-confirmation-box-lwc title={confirmationTitle} message={confirmationMessage} confirm-label="Yes" cancel-label="No" visible={isDialogVisibleGen} name="confirmModal" onclick={getConfirmationGen}></c-ds_-portal-confirmation-box-lwc>
+      <template if:true={isDeleteModalOpen}>
+	<lightning-card>
+      <div class="slds-container_small">
+            <section role="dialog" tabindex="-1" aria-labelledby="modal-heading-01" aria-modal="true"
+                aria-describedby="modal-content-id-1" class="slds-modal slds-fade-in-open">
+                <button class="slds-button slds-button_icon slds-modal__close slds-button_icon-inverse">
+                  <svg class="slds-button__icon slds-button__icon_large" aria-hidden="true">
+                    <use xlink:href="/assets/icons/utility-sprite/svg/symbols.svg#close"></use>
+                  </svg>
+                  <span class="slds-assistive-text">Close</span>
+                </button>
+            <div class="slds-modal__container" style="height: 500px;">
+                <header class="slds-modal__header">
+                    <span class="headerTitle">Remove Member Role</span>
+                </header>
+            <div class=" slds-grid_align-center slds-grid slds-wrap alignItemsCenter slds-modal__content slds-p-around_medium"
+                      id="modal-content-id-1">
+            <div class="slds-col">						
+						  <template for:each={rolePicklistOptions} for:item="item">
+								<div key={item.value}>
+									<p class="message_holder" style="text-align: left;padding-top: 10px;">{item.label}</p>
+									<c-ds_-portal-checkbox-toggle
+                      field-label="Do you want to remove Director"
+                      disabled={disableCheckboxToggle}
+                      ontoggleevent={handleRoleChange}
+                      fieldapi-name={item.value}
+                      field-values={roleList}
+                      field-type="Toggle Checkbox"
+                      object-api-name={item.value}
+                      has-change-effect=false
+                      changejsname=""
+                      field-errormessage="">
+                  </c-ds_-portal-checkbox-toggle>
+								</div>								
+							</template>
+							  <template if:true={hasRoleError}>
+                  <p class="redColor" style="text-align: left;">{roleValidationMessage}</p>
+                </template>							 
+							 <div style="padding-top: 20px;">
+							  {confirmationMessage}
+               </div>	
+               <br/>
+						 </div>
+             
+            <div class="slds-col divItemFlex">
+                <button class="btn" variant="neutral" name="cancel" title="No"
+                onclick={closeModal}>No</button>
+            <button class="btn" variant="brand" name="confirm" title="Yes"
+                onclick={deleteMemberRole}>Yes</button>
+            </div>  
+            </div>
+            </div>                
+            </section>
+            <div class="slds-backdrop slds-backdrop_open"></div>
+        </div>
+      </lightning-card>
+   </template>	
+    <!--template if:true={isReqGenerated}-->
+      <template if:true={showShareHoldersForm}>
+        <lightning-layout>
+          <lightning-layout-item size="12">
+            <!--lightning-layout multiple-rows-->
+              <!--lightning-layout-item size="12"-->
+                <!--template if:true={isShareHolderForm}>
+                  <lightning-layout multiple-rows>                   
+                    <lightning-layout-item size="12" padding="around-small" class="cell">
+                      <div class="horizontal-radio-group">
+                        <label for="radioGroup" class="required-input">Shareholder Type</label>
+                        <lightning-radio-group id="radioGroup" name="radioGroupShareholderType" label="" options={picklistOptions} value={shareHolderSelectedValue} type="radio" class="radio-combo-inline" variant="label-hidden" onchange={handleShareHolderChange}></lightning-radio-group>
+                      </div>
+                    </lightning-layout-item>
+                    <lightning-layout-item size="6" padding="around-small" lwc:if={isShareHolderPage}>
+                        <label for="noOfShares" class="required-input">No of Shares</label>
+                        <lightning-input type="number" class="slds-text-title_caps" id="noOfShares" variant="label-hidden" required="true" name="No_of_shares__c" value={NoOfShares}  onchange={handleOnChange}></lightning-input>
+                    </lightning-layout-item>
+                    <lightning-layout-item size="6" padding="around-small"  lwc:if={hideDACCDropdown} style="padding:9px;">
+                      <lightning-combobox
+                          name="DACC_Registered__c"
+                          label="Is the Corporate exist in Dubai South?"
+                          value={DACCAccount}
+                          options={daccOptions}
+                          required="true"
+                          onchange={handleOnChange} style="max-height:46px;">
+                        </lightning-combobox>
+                  </lightning-layout-item>
+                    <lightning-layout-item size="6" padding="around-small" lwc:if={isDACCRegistered}>                   
+                    <label for="corporateAccount" class="required-input">Corporate Account</label>
+                    <c-ds_-portal-custom-lookup-cmp
+                        icon-name="standard:account"
+                        s-object-api-name="Account"
+                        label=""
+                        onlookupupdate={handleLookupPickListValue}
+                        field-type="Lookup"
+                        bind-value="Corporate_Account__c"
+                        default-record-id={sObjects}
+                        placeholder-text="Search Account"
+                        lookup-condition="Recordtype.Name ='DWC Account - Registered' AND IsPersonAccount=false"
+                        field-to-display="Name"
+                        required="true">
+                    </c-ds_-portal-custom-lookup-cmp>
+                  </lightning-layout-item>
+                  </lightning-layout>
+                </template-->
+              <!--template if:true={isShareholderSel}-->
+              <template if:true={isSelectedShareholderType}>
+              <lightning-layout multiple-rows>
+              <lightning-layout-item size="12" padding="around-small" class="cell" lwc:if={isNotDACCRegistered}>
+                <label for="file-upload-input-01" class="required-input">{documentText}</label>
+                <div class="slds-form-element">
+                  <div class="div-input-container">
+                    <div class="file-input-container">
+                      <lightning-input type="file" 
+                        label=""
+                        accept=".pdf, .jpg, .jpeg"
+                        variant="label-hidden"
+                        data-name="sel"
+                        onchange={handleUploadFinished}>
+                        </lightning-input>
+                            <!-- Help Text Icon -->
+                          <lightning-helptext
+                          content={helpText}
+                          class="help-icon">
+                        </lightning-helptext>
+                      </div>
+                      <!--template if:true={showChoosefromPeople}>
+                        <div>
+                          <lightning-button label="Choose from People" onclick={openModal}></lightning-button>
+                        </div>
+                      </template-->
+                      <template if:true={showChoosefromExisting}>
+                      <div> 
+                          <lightning-button label="Choose from Existing" onclick={openExistingModal}></lightning-button>
+                      </div>
+                      </template>
+                  </div>
+                </div>
+              </lightning-layout-item>
+            </lightning-layout>
+                <!-- <input type="file" accept=".pdf,.doc,.docx,.png,.jpg" /> -->
+                  <div lwc:if={uploadedFileName} class="uploadedFile">
+                     <!--p style="float: inline-start;"><a href={documentURL} target="_blank">{uploadedFileName}</a></p-->
+                     <p style="float: inline-start;"><span style="color:#008b95">{documentName}</span></p>
+                  </div>
+               <!--/lightning-layout-item-->  
+                   <!-- Added by Vinod for Company Registration - Start -->
+                     <!--template lwc:if={isAmendmentModalOpen}>
+                      <section role="dialog" tabindex="-1" aria-modal="true" aria-labelledby="modal-heading-011" class="slds-modal slds-fade-in-open slds-modal_medium">
+                        <div class="slds-modal__container">
+                          <button class="slds-button slds-button_icon slds-modal__close slds-button_icon-inverse">
+                            <svg class="slds-button__icon slds-button__icon_large" aria-hidden="true">
+                              <use xlink:href="/assets/icons/utility-sprite/svg/symbols.svg#close"></use>
+                            </svg>
+                            <span class="slds-assistive-text">Cancel and close</span>
+                          </button>
+                          <div class="slds-modal__header">
+                            <h1 id="modal-heading-0111" class="slds-modal__title slds-hyphenate">Choose from Uploaded People</h1>
+                          </div>
+                          <div class="slds-modal__content slds-p-around_medium" id="modal-content-id-11">
+                            <c-ds_-on-boarding-data-table href="#" table-data={relatedRecords} header-cols={relatedDataColumns} has-status="true" onrowaction={handleRowAction}></c-ds_-on-boarding-data-table>
+                          </div>
+                          <div class="slds-modal__footer">
+                            <button class="slds-button slds-button_neutral slds-float_right" onclick={closeModal} aria-label="Cancel and close">Cancel</button>
+                          </div>
+                        </div>
+                      </section>
+                      <div class="slds-backdrop slds-backdrop_open" role="presentation"></div>
+                    </template-->
+
+                    <template lwc:if={isPersonAccountModalOpen}>
+                      <section role="dialog" tabindex="-1" aria-modal="true" aria-labelledby="modal-heading-022" class="slds-modal slds-fade-in-open slds-modal_medium">
+                        <div class="slds-modal__container">
+                          <button class="slds-button slds-button_icon slds-modal__close slds-button_icon-inverse">
+                            <svg class="slds-button__icon slds-button__icon_large" aria-hidden="true">
+                              <use xlink:href="/assets/icons/utility-sprite/svg/symbols.svg#close"></use>
+                            </svg>
+                            <span class="slds-assistive-text">Cancel and close</span>
+                          </button>
+                          <div class="slds-modal__header">
+                            <h1 id="modal-heading-0222" class="slds-modal__title slds-hyphenate">Choose from Existing People</h1>
+                          </div>
+                          <div class="slds-modal__content slds-p-around_medium" id="modal-content-id-22">
+                            <c-ds_-on-boarding-data-table href="#" table-data={relatedRecordsAll} header-cols={relatedDataColumns} has-status="true" onrowaction={handleRowAction}></c-ds_-on-boarding-data-table>
+                          </div>
+                          <div class="slds-modal__footer">
+                            <button class="slds-button slds-button_neutral slds-float_right" onclick={closeModalExisting} aria-label="Cancel and close">Cancel</button>
+                          </div>
+                        </div>
+                      </section>
+                      <div class="slds-backdrop slds-backdrop_open" role="presentation"></div>
+                    </template>
+                    <!-- Vinod Changes - End -->
+                   
+                  <!--/div-->
+                <!--/div-->
+              </template>
+                <template if:true={hasError}>
+                  <p class="redColor">{validationMessage}</p>
+                </template> <br/>
+                <template if:true={hasError}>
+                  <p style="color:red; text-align: center">{validationErrorMessage}</p>
+                </template>
+                <template if:true={showPersonalInfo}>
+                <template for:each={sectionDetails} for:item="sectionInfo">
+                  <template if:true={sectionInfo.section.isRenderByDefault}>
+                  <div lwc:if={sectionInfo.section.acbox__Show_Header__c} key={sectionInfo.section.Name} class="clearElements accordion_header">
+                    <div class="label_help_flex">
+                      <strong>{sectionInfo.section.acbox__Header_Text__c} </strong>
+                      <template lwc:if={sectionInfo.section.acbox__Description__c}>
+                        <div class="label_help_position"><lightning-helptext 
+                              content={sectionInfo.section.acbox__Description__c}></lightning-helptext></div>
+                      </template>
+                    </div>
+                  </div>
+                  <template for:each={sectionInfo.sectionDetails} for:item="fieldInfo">
+                    <template if:true={fieldInfo.isRenderByDefault}>
+                      <div class="col-12 col-md-6 margin-botton" data-colms={fieldInfo.colCount} key={fieldInfo.acbox__Field_API_Name__c}>
+                        <template lwc:if={fieldInfo.isOutput}>
+                          <lightning-record-edit-form record-id={obrecordId} key={fieldInfo.acbox__Field_API_Name__c} object-api-name={sectionInfo.section.acbox__Child_Object_Name__c}>
+                            <label for={fieldInfo.acbox__Field_API_Name__c} class="inputLabelBold" data-type={fieldInfo.acbox__Type__c} style={fieldInfo.acbox__Style_Class__c}> {fieldInfo.acbox__Label_Override__c}</label>
+                            <lightning-output-field field-name={fieldInfo.acbox__Field_API_Name__c} data-hidden={fieldInfo.acbox__Is_Hidden__c} variant="label-hidden" data-type={fieldInfo.acbox__Type__c} class="formField" style={fieldInfo.acbox__Style_Class__c}></lightning-output-field>
+                          </lightning-record-edit-form>
+                        </template>
+                        <!-- toggle custom component start-->
+                        <template lwc:elseif={fieldInfo.isToggleInput}>
+                          <div class="label_help_flex">
+                            <label for={fieldInfo.acbox__Field_API_Name__c} class="inputLabel"> {fieldInfo.acbox__Label_Override__c}</label>
+                            <template lwc:if={fieldInfo.acbox__Help_Text__c}>
+                              <div class="label_help_position">
+                                <lightning-helptext content={fieldInfo.acbox__Help_Text__c}></lightning-helptext>
+                              </div>
+                            </template>
+                          </div>
+                          <!--template lwc:if={loadCustomCmp}-->
+                            <c-ds_-portal-checkbox-toggle field-label={fieldInfo.acbox__Label_Override__c} disabled={fieldInfo.acbox__Is_Disable__c} ontoggleevent={handleToggleChange} fieldapi-name={fieldInfo.acbox__Field_API_Name__c} field-values={sObjects} field-type={fieldInfo.acbox__Field_type__c} object-api-name={reqObjectName} has-change-effect={fieldInfo.acbox__Has_On_Change__c} changejsname={fieldInfo.acbox__On_Change_JS_Function__c} field-errormessage={fieldInfo.acbox__Error_Message__c}></c-ds_-portal-checkbox-toggle>
+                            <template if:true={isUBOTreeVisible}>
+                              <c-ds_-portal-u-b-o-tree-diagram action-template-id={actionTempId}  object-api-name={childObjectForUBO} service-request-id={serviceRequestId} onubosave={handleUboSave}  relationships={uboRelationship}><!-- ubo-section-detail={uboSectionDetail}--></c-ds_-portal-u-b-o-tree-diagram>
+                            </template>
+                            <!--/template-->
+                        </template>
+						            <!-- toggle custom component end -->
+                        <!-- radio group custom component start-->
+                        <!--template lwc:elseif={fieldInfo.isRadioGroup}>
+                            <div class="label_help_flex">
+                            <label for={fieldInfo.acbox__Field_API_Name__c} class="inputLabel"
+                              style={fieldInfo.acbox__Style_Class__c}>
+                              <abbr class="slds-required" title="required"
+                                if:true={fieldInfo.acbox__Is_required__c}>*</abbr>
+                              {fieldInfo.acbox__Label_Override__c}</label>
+                            <template lwc:if={fieldInfo.acbox__Help_Text__c}>
+                              <div class="label_help_position"><lightning-helptext 
+                                content={fieldInfo.acbox__Help_Text__c}></lightning-helptext></div>
+                            </template>
+                          </div>
+                          <template lwc:if={loadCustomCmp}>
+                            <c-ds_-portal-radio-group-lwc
+                              field-label={fieldInfo.acbox__Label_Override__c}
+                              onchangeradiogroup={handleRadioGroupChange}
+                              fieldapi-name={fieldInfo.acbox__Field_API_Name__c}
+                              field-value={sObjects} 
+                              field-values={picklistValues}
+                              field-type={fieldInfo.acbox__Field_type__c} 
+                              object-api-name={reqObjectName}
+                              has-change-effect={fieldInfo.acbox__Has_On_Change__c}
+                              changejsname={fieldInfo.acbox__On_Change_JS_Function__c}
+                              field-errormessage={fieldInfo.acbox__Error_Message__c}>
+                            </c-ds_-portal-radio-group-lwc>
+                          </template>
+                        </template-->
+                          <!-- radio group custom component start-->
+                        <template lwc:else>
+                          <lightning-record-edit-form record-id={obrecordId} key={fieldInfo.acbox__Field_API_Name__c} object-api-name={sectionInfo.section.acbox__Child_Object_Name__c}>
+                            <div class="label_help_flex">
+                            <label for={fieldInfo.acbox__Field_API_Name__c} class="inputLabel">
+                              <abbr class="slds-required" title="required" if:true={fieldInfo.acbox__Is_required__c}>*</abbr> {fieldInfo.acbox__Label_Override__c} </label>
+                            <template lwc:if={fieldInfo.acbox__Help_Text__c}>
+                                <div class="label_help_position"><lightning-helptext 
+                                  content={fieldInfo.acbox__Help_Text__c}></lightning-helptext></div>
+                            </template>
+                            </div>
+                            <lightning-input-field 
+                            field-name={fieldInfo.acbox__Field_API_Name__c} 
+                            required={fieldInfo.acbox__Is_required__c} 
+                            disabled={fieldInfo.acbox__Is_Disable__c} 
+                            data-target-id={fieldInfo.acbox__Field_API_Name__c} 
+                            id={fieldInfo.acbox__Field_API_Name__c} 
+                            data-hidden={fieldInfo.acbox__Is_Hidden__c} 
+                            value={fieldInfo.acbox__Default_Value__c} 
+                            data-target-sr={fieldInfo.acbox__Has_On_Change__c} 
+                            data-target-type={fieldInfo.acbox__Field_type__c} 
+                            data-target-regex={fieldInfo.acbox__Pattern_Match__c} 
+                            data-target-changejsfunction={fieldInfo.acbox__On_Change_JS_Function__c} 
+                            class="overriddenCss formField" variant="label-hidden" 
+                            onchange={handleInputValues} 
+                            data-target-errormessage={fieldInfo.acbox__Error_Message__c} 
+                            data-is-phone-field={fieldInfo.isPhoneInput}>
+                            </lightning-input-field>
+                          </lightning-record-edit-form>
+                        </template>
+                        <template if:true={fieldInfo.hasError}>
+                          <p class="redColor" key={fieldInfo.errorMessage}> {fieldInfo.errorMessage} </p>
+                        </template>
+                      </div>
+                    </template>
+                  </template>
+                   </template>
+                </template>
+                </template>
+                <!-- show Shareholder type section -->
+                <template if:true={showShareholdeTypeSection}>
+                <template for:each={sectionDetails} for:item="sectionInfo">
+                  <template if:true={sectionInfo.section.isRenderByDefault}>
+                  <div lwc:if={sectionInfo.section.acbox__Show_Header__c} key={sectionInfo.section.Name} class="clearElements accordion_header">
+                    <div class="label_help_flex">
+                      <strong>{sectionInfo.section.acbox__Header_Text__c} </strong>
+                        <template lwc:if={sectionInfo.section.acbox__Description__c}>
+                        <div class="label_help_position"><lightning-helptext 
+                              content={sectionInfo.section.acbox__Description__c}></lightning-helptext></div>
+                        </template>
+                    </div>
+                  </div>
+                  <template for:each={sectionInfo.sectionDetails} for:item="fieldInfo">
+                    <template if:true={fieldInfo.isRenderByDefault}>
+                      <div class="col-12 col-md-6 margin-botton" data-colms={fieldInfo.colCount} key={fieldInfo.acbox__Field_API_Name__c}>
+                        <template lwc:if={fieldInfo.isOutput}>
+                          <lightning-record-edit-form record-id={obrecordId} key={fieldInfo.acbox__Field_API_Name__c} object-api-name={sectionInfo.section.acbox__Child_Object_Name__c}>
+                            <label for={fieldInfo.acbox__Field_API_Name__c} class="inputLabelBold" data-type={fieldInfo.acbox__Type__c} style={fieldInfo.acbox__Style_Class__c}> {fieldInfo.acbox__Label_Override__c}</label>
+                            <lightning-output-field field-name={fieldInfo.acbox__Field_API_Name__c} data-hidden={fieldInfo.acbox__Is_Hidden__c} variant="label-hidden" data-type={fieldInfo.acbox__Type__c} class="formField" style={fieldInfo.acbox__Style_Class__c}></lightning-output-field>
+                          </lightning-record-edit-form>
+                        </template>
+                        <!-- toggle custom component start-->
+                        <template lwc:elseif={fieldInfo.isToggleInput}>
+                          <div class="label_help_flex">
+                            <label for={fieldInfo.acbox__Field_API_Name__c} class="inputLabel"> {fieldInfo.acbox__Label_Override__c}</label>
+                            <template lwc:if={fieldInfo.acbox__Help_Text__c}>
+                              <div class="label_help_position">
+                                <lightning-helptext content={fieldInfo.acbox__Help_Text__c}></lightning-helptext>
+                              </div>
+                            </template>
+                          </div>
+                          <!--template lwc:if={loadCustomCmp}-->
+                            <c-ds_-portal-checkbox-toggle field-label={fieldInfo.acbox__Label_Override__c} disabled={fieldInfo.acbox__Is_Disable__c} ontoggleevent={handleToggleChange} fieldapi-name={fieldInfo.acbox__Field_API_Name__c} field-values={sObjects} field-type={fieldInfo.acbox__Field_type__c} object-api-name={reqObjectName} has-change-effect={fieldInfo.acbox__Has_On_Change__c} changejsname={fieldInfo.acbox__On_Change_JS_Function__c} field-errormessage={fieldInfo.acbox__Error_Message__c}></c-ds_-portal-checkbox-toggle>
+                            <template if:true={isUBOTreeVisible}>
+                              <c-ds_-portal-u-b-o-tree-diagram action-template-id={actionTempId}  object-api-name={childObjectForUBO} service-request-id={serviceRequestId} onubosave={handleUboSave} relationships={uboRelationship}><!--ubo-section-detail={uboSectionDetail}--></c-ds_-portal-u-b-o-tree-diagram>
+                            </template>
+                            <!--/template-->
+                        </template>
+						            <!-- toggle custom component end -->
+                        <!-- radio group custom component start-->
+                        <!--template lwc:elseif={fieldInfo.isRadioGroup}>
+                            <div class="label_help_flex">
+                            <label for={fieldInfo.acbox__Field_API_Name__c} class="inputLabel"
+                              style={fieldInfo.acbox__Style_Class__c}>
+                              <abbr class="slds-required" title="required"
+                                if:true={fieldInfo.acbox__Is_required__c}>*</abbr>
+                              {fieldInfo.acbox__Label_Override__c}</label>
+                            <template lwc:if={fieldInfo.acbox__Help_Text__c}>
+                              <div class="label_help_position"><lightning-helptext 
+                                content={fieldInfo.acbox__Help_Text__c}></lightning-helptext></div>
+                            </template>
+                          </div>
+                          <template lwc:if={loadCustomCmp}>
+                            <c-ds_-portal-radio-group-lwc
+                              field-label={fieldInfo.acbox__Label_Override__c}
+                              onchangeradiogroup={handleRadioGroupChange}
+                              fieldapi-name={fieldInfo.acbox__Field_API_Name__c}
+                              field-value={sObjects} 
+                              field-values={picklistValues}
+                              field-type={fieldInfo.acbox__Field_type__c} 
+                              object-api-name={reqObjectName}
+                              has-change-effect={fieldInfo.acbox__Has_On_Change__c}
+                              changejsname={fieldInfo.acbox__On_Change_JS_Function__c}
+                              field-errormessage={fieldInfo.acbox__Error_Message__c}>
+                            </c-ds_-portal-radio-group-lwc>
+                          </template>
+                        </template-->
+                          <!-- radio group custom component start-->
+                        <template lwc:else>
+                          <lightning-record-edit-form record-id={obrecordId} key={fieldInfo.acbox__Field_API_Name__c} object-api-name={sectionInfo.section.acbox__Child_Object_Name__c}>
+                            <div class="label_help_flex">
+                            <label for={fieldInfo.acbox__Field_API_Name__c} class="inputLabel">
+                              <abbr class="slds-required" title="required" if:true={fieldInfo.acbox__Is_required__c}>*</abbr> {fieldInfo.acbox__Label_Override__c} </label>
+                            <template lwc:if={fieldInfo.acbox__Help_Text__c}>
+                                <div class="label_help_position"><lightning-helptext 
+                                  content={fieldInfo.acbox__Help_Text__c}></lightning-helptext></div>
+                            </template>
+                            </div>
+                            <lightning-input-field 
+                            field-name={fieldInfo.acbox__Field_API_Name__c} 
+                            required={fieldInfo.acbox__Is_required__c} 
+                            disabled={fieldInfo.acbox__Is_Disable__c} 
+                            data-target-id={fieldInfo.acbox__Field_API_Name__c} 
+                            id={fieldInfo.acbox__Field_API_Name__c} 
+                            data-hidden={fieldInfo.acbox__Is_Hidden__c} 
+                            value={fieldInfo.acbox__Default_Value__c} 
+                            data-target-sr={fieldInfo.acbox__Has_On_Change__c} 
+                            data-target-type={fieldInfo.acbox__Field_type__c} 
+                            data-target-regex={fieldInfo.acbox__Pattern_Match__c} 
+                            data-target-changejsfunction={fieldInfo.acbox__On_Change_JS_Function__c} 
+                            class="overriddenCss formField" variant="label-hidden" 
+                            onchange={handleInputValues} 
+                            data-target-errormessage={fieldInfo.acbox__Error_Message__c} 
+                            data-is-phone-field={fieldInfo.isPhoneInput}>
+                            </lightning-input-field>
+                          </lightning-record-edit-form>
+                        </template>
+                        <template if:true={fieldInfo.hasError}>
+                          <p class="redColor" key={fieldInfo.errorMessage}> {fieldInfo.errorMessage} </p>
+                        </template>
+                      </div>
+                    </template>
+                  </template>
+                   </template>
+                </template>
+                </template>
+          </lightning-layout-item>
+        </lightning-layout>
+        <div style="display: flex; justify-content: center;">
+          <!--template if:true={showShareholdeTypeSection}-->
+            <div style="padding: 10px;">
+              <button class="details_start_button" onclick={handleSave}>Save</button>
+            </div>
+          <!--/template-->
+          <div style="padding: 10px;">
+            <button class="details_start_button" onclick={handleFormCancel}>Cancel</button>
+          </div>
+        </div>
+      </template>
+    <!--/template-->
+  </div>
+</template>

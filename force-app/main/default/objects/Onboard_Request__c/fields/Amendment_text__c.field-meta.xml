@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomField xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>Amendment_text__c</fullName>
+    <description>Field is used on community page to show SR Amendments</description>
+    <externalId>false</externalId>
+    <formula>CASE(Request_Type__c, 
+&apos;Increase Share Capital With New Shareholders&apos;, &apos;New shareholder&apos;, 
+&apos;Share Transfer&apos;,&apos; Transfer Details&apos;,
+&apos;Amendment Details&apos;)</formula>
+    <label>Amendment text</label>
+    <required>false</required>
+    <trackHistory>false</trackHistory>
+    <trackTrending>false</trackTrending>
+    <type>Text</type>
+    <unique>false</unique>
+</CustomField>

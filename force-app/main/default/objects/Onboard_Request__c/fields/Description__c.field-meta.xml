@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomField xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>Description__c</fullName>
+    <externalId>false</externalId>
+    <formula>CASE(Request_Type__c, 
+&apos;Change Company Name&apos;, &apos;Change Company Name To &apos;+Proposed_company_name_1_English__c,
+&apos;Change Commercial Name&apos;, &apos;Change Commercial Name To &apos;+Company_Commercial_Name_English__c,
+
+
+Name)</formula>
+    <formulaTreatBlanksAs>BlankAsZero</formulaTreatBlanksAs>
+    <label>Description</label>
+    <required>false</required>
+    <trackHistory>false</trackHistory>
+    <trackTrending>false</trackTrending>
+    <type>Text</type>
+    <unique>false</unique>
+</CustomField>

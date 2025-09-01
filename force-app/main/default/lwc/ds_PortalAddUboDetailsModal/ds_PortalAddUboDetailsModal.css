@@ -1,0 +1,61 @@
+/* Align the fields grid with the accordion header */
+.pad-left-15 {
+  padding-left: 15px;
+}
+
+/* Center the footer buttons */
+.footer-btn-group {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+/* Header strip for sections (matches your existing look) */
+.application .accordion_header {
+  width: 100%;
+  background: #f2f2f2;
+  border-radius: 11px;
+  display: flex;
+  justify-content: space-between;
+  padding: 10px 15px;
+  align-items: center;
+  margin-top: 6px;
+}
+
+/* Label row with optional help icon */
+.label_help_flex {
+  display: flex;
+  gap: 5px;
+}
+.label_help_position {
+  bottom: 3px;
+  position: relative;
+}
+
+/* Labels */
+.inputLabel {
+  font-weight: 400;
+  font-size: 14px;
+}
+.inputLabelBold {
+  font-weight: 700;
+}
+
+/* Error color */
+.redColor {
+  color: var(--dxp-g-destructive, #c23934);
+}
+
+/* Keep full width for base inputs/comboboxes that need it */
+.overriddenCss {
+  --slds-c-dropdown-trigger-display: inherit;
+  width: 100%;
+}
+/* Give read-only static text a light input-like chrome */
+.slds-form-element__static {
+  display: block;
+  padding: .5rem .75rem;
+  border: 1px solid var(--slds-g-color-border-base-1, #dddbda);
+  border-radius: .25rem;
+  background: #fff;
+}

@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomField xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>DCAA_Criteria_4_Match__c</fullName>
+    <externalId>false</externalId>
+    <formula>OR(
+ISPICKVAL(DCAA_Current_Status__c ,&apos;Save New Company Success&apos;),
+ISPICKVAL(DCAA_Current_Status__c ,&apos;Company Exists&apos;),
+ISPICKVAL(DCAA_Current_Status__c, &apos;Permit Request Callout Error&apos;)
+
+)</formula>
+    <formulaTreatBlanksAs>BlankAsZero</formulaTreatBlanksAs>
+    <label>DCAA Criteria 4 Match?</label>
+    <trackHistory>false</trackHistory>
+    <trackTrending>false</trackTrending>
+    <type>Checkbox</type>
+</CustomField>

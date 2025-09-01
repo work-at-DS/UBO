@@ -1,0 +1,20 @@
+<template>
+  <template if:true={isLoading}>
+    <lightning-spinner size="small"></lightning-spinner>
+  </template>
+
+  <template if:true={relationships}>
+    <c-ds_-portal-u-b-o-tree-diagram
+      relationships={relationships}
+     action-template-id={actionTempId}
+     service-request-id={serviceRequestId}
+     object-api-name={objectApiName}
+      is-view-only=true></c-ds_-portal-u-b-o-tree-diagram> <!--  ubo-section-detail={uboSectionDetail} -->
+  </template>
+
+  <template if:true={error}>
+    <div class="slds-text-color_error slds-m-top_small">
+      {error}
+    </div>
+  </template>
+</template>

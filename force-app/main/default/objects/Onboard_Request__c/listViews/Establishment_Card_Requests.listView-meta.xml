@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ListView xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>Establishment_Card_Requests</fullName>
+    <columns>NAME</columns>
+    <columns>Account_Name__c</columns>
+    <columns>Urgent_Processing_EC__c</columns>
+    <columns>Establishment_Category__c</columns>
+    <columns>Status__c</columns>
+    <filterScope>Everything</filterScope>
+    <filters>
+        <field>RECORDTYPE</field>
+        <operation>equals</operation>
+        <value>Onboard_Request__c.Freelancer</value>
+    </filters>
+    <filters>
+        <field>Establishment_Card_Required__c</field>
+        <operation>equals</operation>
+        <value>1</value>
+    </filters>
+    <filters>
+        <field>Status__c</field>
+        <operation>equals</operation>
+        <value>Establishment Card Under Process</value>
+    </filters>
+    <label>Establishment Card Requests</label>
+</ListView>

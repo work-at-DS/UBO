@@ -1,0 +1,447 @@
+/*Inline Radio Buttons*/
+.radio-combo-inline .slds-form-element__control .slds-radio {
+  display: inline-block !important;
+}
+
+.delete-icon {
+  --sds-c-icon-color-foreground-default: #FF0000;
+  --sds-c-icon-color-foreground: #FF0000;
+  --sds-c-icon-color-background: #FF0000;
+}
+
+.delete-icon .slds-button__icon {
+  fill: #FF0000 !important;
+}
+
+.table-header1 {
+  height: 45px;
+  display: flex;
+  padding: 0 16px;
+  font-size: 15px;
+  align-items: center;
+  border-bottom: 1px solid #008B95;
+}
+.btn {
+  flex-direction: row;
+  justify-content: center;
+  width: 200px;
+  height: 50px;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  /* color: #FFFFFF; */
+  background: #008B95;
+  border-radius: 56px;
+  border: none;
+  margin-right: 10px;
+  font-weight: 700;
+  font-size: 16px;
+  display: flex;
+  align-items: center;
+  text-align: center;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: #FFFFFF;
+}
+
+.alignItemsCenter {
+  display: flex;
+  justify-content: center;
+  text-align: center;
+}
+.divItemFlex{
+  display: flex;
+  padding-top: 1px;
+}
+.headerTitle{
+  font-style: normal;
+font-weight: 700;
+font-size: 20px;
+line-height: 20px;
+/* identical to box height, or 100% */
+
+text-align: center;
+
+/* text/on surface/primary */
+
+color: #000000;
+
+
+/* Inside auto layout */
+
+flex: none;
+order: 0;
+align-self: stretch;
+flex-grow: 0;
+}
+
+.table-header1>* {
+  flex: 0 0 20%;
+  padding-right: 20px;
+}
+
+.dashboard__table-rows>div:hover {
+  background-color: #e3e8ec;
+}
+
+@media only screen and (min-width: 1500px) and (max-width:1920px) {
+
+  .table-header,
+  .table-rows {
+    font-size: 16px;
+  }
+}
+
+@media only screen and (min-width:1925px) {
+
+  .table-header,
+  .table-rows {
+    font-size: 18px;
+  }
+}
+
+th {
+  height: 45px;
+  padding: 5px;
+  font-size: 12px;
+  align-items: center;
+  border-bottom: 1px solid #008B95;
+  border-top: 1px solid #008B95
+}
+
+td {
+  height: 45px;
+  padding: 5px;
+  font-size: 12px;
+  align-items: center;
+  border-bottom: 1px solid #ececec;
+}
+
+.table-rows {
+  align-items: center;
+  display: flex;
+  padding: 0 16px;
+  font-size: 14px;
+  border-bottom: 1px solid #ececec;
+  min-height: 30px;
+}
+
+.table-rows:hover a {
+  opacity: 1;
+}
+
+.table-rows:hover a:hover {
+  color: var(--dxp-g-brand);
+  text-decoration: none;
+}
+
+.table-rows>* {
+  flex: 0 0 20%;
+  padding: 0px 0px 10px 0px;
+}
+
+.table-rows--col4>* {
+  flex: 0 0 22.5%;
+  padding-right: 20px;
+}
+
+.application {
+  /*display: flex;*/
+  width: 100%;
+  max-width: 100%;
+  padding: 0;
+  --dxp-c-placeholder-opacity: 0.15;
+}
+
+.label_help_position {
+  bottom: 3px;
+  position: relative;
+}
+
+.label_help_flex {
+  display: flex;
+  gap: 5px;
+}
+
+.file-input-container {
+  display: flex;
+  /*align-items: center;*/
+}
+
+.div-input-container {
+  display: flex;
+  gap: 15%;
+  /*align-items: center;*/
+}
+
+.help-icon {
+  margin-left: 10px;
+  /* Adjust spacing between file input and help text */
+}
+
+.required-input {
+  position: relative;
+}
+
+.required-input::before {
+  content: "*";
+  color: red;
+  position: absolute;
+  top: 50%;
+  left: -0.5rem;
+  transform: translateY(-50%);
+}
+
+.input-container {
+  display: flex;
+  align-items: center;
+}
+
+.application .text--h1[c-dboTextCmp_dboTextCmp] {
+  font-size: 32px;
+  margin: 36px 0;
+}
+
+.application .slds-grid {
+  flex: 1;
+}
+
+:host {
+  --sds-c-textarea-sizing-min-height: 130px;
+}
+
+.application--small {
+  font-size: 14px;
+  color: #4e4e4e;
+}
+
+/*.application__container {
+      max-width: 502px;
+    }*/
+@media (min-width: 1024px) {
+  /*.application__container {
+          margin-left: 90px;
+          margin-right: 60px; }*/
+}
+
+.application__separator {
+  /*  max-width: 675px;*/
+  border: 1px dashed #d9d9d9;
+  margin: 36px 24px;
+  clear: both;
+}
+
+@media (min-width: 1024px) {
+  .application__separator {
+    margin: 36px 0 36px 60px;
+  }
+}
+
+.application h2 {
+  color: #141414;
+  font-size: 16px;
+  font-weight: 600;
+}
+
+.padBot24 {
+  padding-bottom: 24px;
+}
+
+.clearElements {
+  clear: both;
+}
+
+[data-colms="1"] {
+  width: 100%;
+  /*min-height: 90px;*/
+  padding: 10px 0px 0px 10px;
+}
+
+[data-hidden="true"],
+[data-hidden="viewonly"] {
+  display: none;
+}
+
+[data-hidden="true"] {
+  display: none;
+}
+
+[data-colms="2"] {
+  width: 50%;
+  display: inline-grid;
+  padding: 10px 0px 0px 10px;
+}
+
+[data-colms="3"] {
+  width: 33.33%;
+  display: inline-grid;
+  padding: 10px 0px 0px 10px;
+}
+
+[data-colms="4"] {
+  width: 25%;
+  display: inline-grid;
+  padding: 10px 0px 0px 10px;
+}
+
+.text--h2 {
+  font-size: 20px;
+  font-weight: bold;
+  padding: 30px 0px;
+}
+
+.overlay {
+  opacity: 0.7;
+  filter: alpha(opacity=20);
+  background-color: #000;
+  width: 100%;
+  height: 100%;
+  z-index: 10;
+  top: 0;
+  left: 0;
+  position: fixed;
+}
+
+/*.application .accordion {
+  margin-bottom: 20px;}*/
+.application .accordion.active .icon {
+  transform: rotate(180deg);
+}
+
+.application .accordion .icon {
+  transition: all 0.5s;
+}
+
+.application .accordion_header {
+  width: 100%;
+  left: 0px;
+  top: 0px;
+  background: #f2f2f2;
+  border-radius: 11px;
+  display: flex;
+  justify-content: space-between;
+  padding: 10px 15px;
+  align-items: center;
+  margin-top: 6px;
+  /* margin-bottom: 20px; */
+}
+
+.application .accordion_header strong {
+  font-style: normal;
+  font-weight: 700;
+  font-size: 16px;
+  color: #000000;
+}
+
+.application .accordion.active .accordion_body {
+  height: auto;
+  /* padding: 15px 0; */
+  display: flex;
+  flex-direction: column;
+}
+
+.application .gap-05 {
+  gap: 5px;
+}
+
+.application .gap-1 {
+  gap: 10px;
+}
+
+.application .gap-2 {
+  gap: 20px;
+}
+
+.application .accordion_body {
+  height: 0;
+  display: none;
+  padding: 0;
+  transition: all 0.5s;
+}
+
+.overriddenCss {
+  --slds-c-dropdown-trigger-display: inherit;
+  width: 100%;
+}
+
+.blockDisplay {
+  display: block !important;
+}
+
+.redColor {
+  color: var(--dxp-g-destructive);
+}
+
+.inputLabelBold {
+  font-weight: bold;
+}
+
+.inputLabel {
+  font-weight: 400;
+  font-size: 14px;
+}
+
+.fieldContainer {
+  height: auto;
+  ;
+}
+
+[data-is-phone-field="true"] {
+  position: relative;
+  bottom: 56px;
+  padding-left: 120px !important;
+}
+
+[data-is-phone-container="true"] {
+  height: 60px;
+}
+
+.details_start_button {
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
+  padding: 12px 32px;
+  gap: 8px;
+  background: #008B95;
+  border-radius: 56px;
+  color: white;
+  border: 0;
+}
+
+.modal-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(0, 0, 0, 0.5);
+  z-index: 1;
+}
+
+.modal-content {
+  background-color: #fefefe;
+  padding: 20px;
+  border-radius: 10px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
+
+.spinner1::after {
+  position: absolute;
+  content: 'Trying to retrieve your details from the uploaded passport.';
+  width: 100%;
+  text-align: center;
+  top: calc(50% + 3em);
+  font-weight: bold;
+}
+
+.spinner2::after {
+  position: absolute;
+  content: 'Please wait while the document is uploading.';
+  width: 100%;
+  text-align: center;
+  top: calc(50% + 3em);
+  font-weight: bold;
+}

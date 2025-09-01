@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ListView xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>Pending_EC_Queue_Onboard_Request</fullName>
+    <filterScope>Queue</filterScope>
+    <label>Pending EC - Queue</label>
+    <queue>Pending_EC_Queue</queue>
+    <sharedTo>
+        <allInternalUsers></allInternalUsers>
+    </sharedTo>
+</ListView>

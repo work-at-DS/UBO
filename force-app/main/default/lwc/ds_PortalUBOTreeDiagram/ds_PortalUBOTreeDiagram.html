@@ -1,0 +1,32 @@
+<template>
+     <template if:true={showSpinner}>
+            <lightning-spinner alternative-text="Uploading" variant="brand" size="large">
+            </lightning-spinner>
+        </template>
+    <div class="ubo-container slds-p-around_small" style={brandStyle}>
+        <!-- Title / page header -->
+        <div class="slds-page-header slds-m-bottom_small slds-p-around_small ubo-header">
+            <div class="slds-media">
+                <div class="slds-media__figure">
+                    <lightning-icon icon-name="standard:hierarchy" size="small" alternative-text={title} class="ubo-header__icon">
+                    </lightning-icon>
+                </div>
+                <div class="slds-media__body">
+                    <h1 class="slds-page-header__title slds-truncate">
+                        {title}
+                    </h1>
+                </div>
+            </div>
+        </div>
+
+        <!-- Tree -->
+        <div class="ubo-tree-map">
+            <div class="tree tree-container" lwc:dom="manual"></div>
+        </div>
+    </div>
+
+    <!-- Confirm delete dialog -->
+    <c-ds_-portal-confirmation-box-lwc title={confirmationTitle} modal-type="confirm" original-message={originalMessage} message={confirmationMessage}
+        confirm-label="Yes" cancel-label="No" visible={isDeleteModalOpen} name="confirmModal" onclick={getConfirmation}>
+    </c-ds_-portal-confirmation-box-lwc>
+</template>

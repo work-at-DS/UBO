@@ -1,0 +1,283 @@
+<template>
+    <div class="container application">
+        <div if:true={showSpinner}>
+            <div class="slds-p-around_x-large spinner-overlay">
+                <lightning-spinner alternative-text="Loading" size="large" class="slds-p-around_x-large spinner-overlay"></lightning-spinner>
+            </div>
+        </div>
+        <template lwc:if={showPPSpinner}>
+            <lightning-spinner alternative-text="Fetching Details" class="slds-p-around_x-large spinner-overlay spinner1"></lightning-spinner>
+        </template>
+        <template lwc:if={showSpinner1}>
+            <lightning-spinner alternative-text="Fetching Details" class="slds-p-around_x-large  spinner-overlay spinner2"></lightning-spinner>
+        </template>
+        <template if:false={isReqGenerated}>
+            <div class="slds-p-around_x-large spinner-overlay">
+                <lightning-spinner alternative-text="Loading" size="large"></lightning-spinner>
+            </div>
+        </template><template if:true={showUBOData}>
+            <div class="dashboard__header-action slds-p-top_medium">
+                <c-ds_-portal-text-style-lwc text={dataTableName} tag="h2"></c-ds_-portal-text-style-lwc>
+            </div>
+            <c-ds_-on-boarding-data-table-dob href="#" table-data={uboMembersData} header-cols={uboColumns} has-status="true" onrowaction={handleRowAction}></c-ds_-on-boarding-data-table-dob>
+        </template>
+        <template if:true={showUBOData}>
+            <template if:false={showShareHoldersForm}>
+                <div style="padding: 10px" class="slds-align_absolute-center">
+                    <button class="details_start_button" onclick={addAdditionalShareHolder}>{addBtnlabel}</button>
+                </div>
+            </template>
+        </template>
+        <br />
+        <template if:true={showShareHoldersForm}>
+            <div>
+                <h1 style="font-size:1.5em;">{formHeader}</h1>
+            </div>
+        </template>
+        <c-ds_-portal-confirmation-box-lwc title={confirmationTitle} message={confirmationMessage} confirm-label="Yes" cancel-label="No" visible={isDialogVisible} name="confirmModal" onclick={getConfirmation}></c-ds_-portal-confirmation-box-lwc>
+        <c-ds_-portal-confirmation-box-lwc title={confirmationTitle} message={confirmationMessage} confirm-label="Yes" cancel-label="No" visible={isDialogVisibleGen} name="confirmModal" onclick={getConfirmationGen}></c-ds_-portal-confirmation-box-lwc>
+        <template if:true={showShareHoldersForm}>
+            <lightning-layout>
+                <lightning-layout-item size="12">
+                    <template if:true={isSelectedUBOType}>
+                        <lightning-layout multiple-rows>
+                            <lightning-layout-item size="12" padding="around-small" class="cell" lwc:if={isNotDACCRegistered}>
+                                <label for="file-upload-input-01" class="required-input">{documentText}</label>
+                                <div class="slds-form-element">
+                                    <div class="div-input-container">
+                                        <div class="file-input-container">
+                                            <lightning-input type="file" label="" accept=".pdf, .jpg, .jpeg" variant="label-hidden" data-name="sel" onchange={handleUploadFinished}>
+                                            </lightning-input>
+                                            <!-- Help Text Icon -->
+                                            <lightning-helptext content={helpText} class="help-icon">
+                                            </lightning-helptext>
+                                        </div>
+                                        <template if:true={showChoosefromExisting}>
+                                            <div>
+                                                <lightning-button label="Choose from Existing" onclick={openExistingModal}></lightning-button>
+                                            </div>
+                                        </template>
+                                    </div>
+                                </div>
+                            </lightning-layout-item>
+                        </lightning-layout>
+                        <div lwc:if={uploadedFileName} class="uploadedFile">
+                          <p style="float: inline-start;"><span style="color:#008b95">{documentName}</span></p>
+                        </div>
+                         <template if:true={hasError}>
+                            <p class="redColor">{validationMessage}</p>
+                        </template>
+                        <br/>
+                        <template lwc:if={isIndividualShareholder}>
+                            <template if:true={isUBOForm}>
+                                <div class="slds-card slds-theme_shade">
+                                    <div class="slds-notify slds-notify_alert slds-alert_warning" style="background-image: none;" role="alert">
+                                        <span class="slds-assistive-text">info</span>
+                                        <span class="slds-icon_container slds-icon-utility-warning slds-m-right_x-small" title="Description of icon when needed">
+                                          <svg class="slds-icon slds-icon_x-small" aria-hidden="true">
+                                              <use xlink:href="/assets/icons/utility-sprite/svg/symbols.svg#info"></use>
+                                          </svg>
+                                        </span>
+                                        <span>{IndividualDescription}</span>
+                                    </div>
+                                </div>
+                            </template>
+                          </template>
+                        <template lwc:elseif={isCorporateShareholder}>
+                            <template if:true={isUBOForm}>
+                                <div class="slds-card slds-theme_shade">
+                                    <div class="slds-notify slds-notify_alert slds-alert_warning" style="background-image: none;" role="alert">
+                                        <span class="slds-assistive-text">info</span>
+                                        <span class="slds-icon_container slds-icon-utility-warning slds-m-right_x-small" title="Description of icon when needed">
+                                          <svg class="slds-icon slds-icon_x-small" aria-hidden="true">
+                                              <use xlink:href="/assets/icons/utility-sprite/svg/symbols.svg#info"></use>
+                                          </svg>
+                                        </span>
+                                        <span>{corporateDescription}</span>
+                                    </div>
+                                </div>
+                            </template>
+                            </template>
+                        <template lwc:elseif={isExceptionUBO}>
+                            <template if:true={isUBOForm}>
+                                <div class="slds-card slds-theme_shade">
+                                    <div class="slds-notify slds-notify_alert slds-alert_warning" style="background-image: none;" role="alert">
+                                        <span class="slds-assistive-text">info</span>
+                                        <span class="slds-icon_container slds-icon-utility-warning slds-m-right_x-small" title="Description of icon when needed">
+                                          <svg class="slds-icon slds-icon_x-small" aria-hidden="true">
+                                              <use xlink:href="/assets/icons/utility-sprite/svg/symbols.svg#info"></use>
+                                          </svg>
+                                        </span>
+                                        <span>{exceptionDescription}</span>
+                                    </div>
+                                </div>
+                            </template>
+                            </template>
+                        <template lwc:if={isPersonAccountModalOpen}>
+                            <section role="dialog" tabindex="-1" aria-modal="true" aria-labelledby="modal-heading-022" class="slds-modal slds-fade-in-open slds-modal_medium">
+                                <div class="slds-modal__container">
+                                    <button class="slds-button slds-button_icon slds-modal__close slds-button_icon-inverse">
+                                        <svg class="slds-button__icon slds-button__icon_large" aria-hidden="true">
+                                            <use xlink:href="/assets/icons/utility-sprite/svg/symbols.svg#close"></use>
+                                        </svg>
+                                        <span class="slds-assistive-text">Cancel and close</span>
+                                    </button>
+                                    <div class="slds-modal__header">
+                                        <h1 id="modal-heading-0222" class="slds-modal__title slds-hyphenate">Choose from Existing People</h1>
+                                    </div>
+                                    <div class="slds-modal__content slds-p-around_medium" id="modal-content-id-22">
+                                        <c-ds_-on-boarding-data-table-dob href="#" table-data={relatedRecordsAll} header-cols={relatedDataColumns} has-status="true" onrowaction={handleRowAction}></c-ds_-on-boarding-data-table-dob>
+                                    </div>
+                                    <div class="slds-modal__footer">
+                                        <button class="slds-button slds-button_neutral slds-float_right" onclick={closeModalExisting} aria-label="Cancel and close">Cancel</button>
+                                    </div>
+                                </div>
+                            </section>
+                            <div class="slds-backdrop slds-backdrop_open" role="presentation"></div>
+                        </template>
+                       
+                    </template>
+
+                    <template if:true={hasError}>
+                        <p style="color:red; text-align: center">{validationErrorMessage}</p>
+                    </template>
+                    <template if:true={showPersonalInfo}>
+                        <template for:each={sectionDetails} for:item="sectionInfo">
+                            <template if:true={sectionInfo.section.isRenderByDefault}>
+                                <div lwc:if={sectionInfo.section.acbox__Show_Header__c} key={sectionInfo.section.Name} class="clearElements accordion_header">
+                                    <div class="label_help_flex">
+                                        <strong>{sectionInfo.section.acbox__Header_Text__c} </strong>
+                                        <template lwc:if={sectionInfo.section.acbox__Description__c}>
+                                        <div class="label_help_position"><lightning-helptext 
+                                            content={sectionInfo.section.acbox__Description__c}></lightning-helptext></div>
+                                        </template>
+                                    </div>
+                                </div>
+                                <template for:each={sectionInfo.sectionDetails} for:item="fieldInfo">
+                                    <template if:true={fieldInfo.isRenderByDefault}>
+                                        <div class="col-12 col-md-6 margin-botton" data-colms={fieldInfo.colCount} key={fieldInfo.acbox__Field_API_Name__c}>
+                                            <template lwc:if={fieldInfo.isOutput}>
+                                                <lightning-record-edit-form record-id={obrecordId} key={fieldInfo.acbox__Field_API_Name__c} object-api-name={sectionInfo.section.acbox__Child_Object_Name__c}>
+                                                    <label for={fieldInfo.acbox__Field_API_Name__c} class="inputLabelBold" data-type={fieldInfo.acbox__Type__c} style={fieldInfo.acbox__Style_Class__c}> {fieldInfo.acbox__Label_Override__c}</label>
+                                                    <lightning-output-field field-name={fieldInfo.acbox__Field_API_Name__c} data-hidden={fieldInfo.acbox__Is_Hidden__c} variant="label-hidden" data-type={fieldInfo.acbox__Type__c} class="formField" style={fieldInfo.acbox__Style_Class__c}></lightning-output-field>
+                                                </lightning-record-edit-form>
+                                            </template>
+                                            <template lwc:elseif={fieldInfo.isToggleInput}>
+                                                <div class="label_help_flex">
+                                                    <label for={fieldInfo.acbox__Field_API_Name__c} class="inputLabel"> {fieldInfo.acbox__Label_Override__c}</label>
+                                                    <template lwc:if={fieldInfo.acbox__Help_Text__c}>
+                                                        <div class="label_help_position">
+                                                            <lightning-helptext content={fieldInfo.acbox__Help_Text__c}></lightning-helptext>
+                                                        </div>
+                                                    </template>
+                                                </div>
+                                                <c-ds_-portal-checkbox-toggle field-label={fieldInfo.acbox__Label_Override__c} disabled={fieldInfo.acbox__Is_Disable__c} ontoggleevent={handleToggleChange} fieldapi-name={fieldInfo.acbox__Field_API_Name__c} field-values={sObjects} field-type={fieldInfo.acbox__Field_type__c}
+                                                object-api-name={reqObjectName} has-change-effect={fieldInfo.acbox__Has_On_Change__c} changejsname={fieldInfo.acbox__On_Change_JS_Function__c} field-errormessage={fieldInfo.acbox__Error_Message__c}></c-ds_-portal-checkbox-toggle>
+                                                <!--/template-->
+                                            </template>
+                                            <template lwc:else>
+                                                <lightning-record-edit-form record-id={obrecordId} key={fieldInfo.acbox__Field_API_Name__c} object-api-name={sectionInfo.section.acbox__Child_Object_Name__c}>
+                                                    <div class="label_help_flex">
+                                                        <label for={fieldInfo.acbox__Field_API_Name__c} class="inputLabel">
+                                                            <abbr class="slds-required" title="required" if:true={fieldInfo.acbox__Is_required__c}>*</abbr> {fieldInfo.acbox__Label_Override__c} </label>
+                                                        <template lwc:if={fieldInfo.acbox__Help_Text__c}>
+                                                            <div class="label_help_position">
+                                                                <lightning-helptext content={fieldInfo.acbox__Help_Text__c}></lightning-helptext>
+                                                            </div>
+                                                        </template>
+                                                    </div>
+                                                    <lightning-input-field field-name={fieldInfo.acbox__Field_API_Name__c} required={fieldInfo.acbox__Is_required__c} disabled={fieldInfo.acbox__Is_Disable__c} data-target-id={fieldInfo.acbox__Field_API_Name__c} id={fieldInfo.acbox__Field_API_Name__c} data-hidden={fieldInfo.acbox__Is_Hidden__c}
+                                                    value={fieldInfo.acbox__Default_Value__c} data-target-sr={fieldInfo.acbox__Has_On_Change__c} data-target-type={fieldInfo.acbox__Field_type__c} data-target-regex={fieldInfo.acbox__Pattern_Match__c} data-target-changejsfunction={fieldInfo.acbox__On_Change_JS_Function__c}
+                                                    class="overriddenCss formField" variant="label-hidden" onchange={handleInputValues} data-target-errormessage={fieldInfo.acbox__Error_Message__c} data-is-phone-field={fieldInfo.isPhoneInput}>
+                                                    </lightning-input-field>
+                                                </lightning-record-edit-form>
+                                            </template>
+                                            <template if:true={fieldInfo.hasError}>
+                                                <p class="redColor" key={fieldInfo.errorMessage}> {fieldInfo.errorMessage} </p>
+                                            </template>
+                                        </div>
+                                    </template>
+                                </template>
+                            </template>
+                        </template>
+                    </template>
+                    <!-- show UBO type section -->
+                    <template if:true={showUBOTypeSection}>
+                        <template for:each={sectionDetails} for:item="sectionInfo">
+                            <template if:true={sectionInfo.section.isRenderByDefault}>
+                                <div lwc:if={sectionInfo.section.acbox__Show_Header__c} key={sectionInfo.section.Name} class="clearElements accordion_header">
+                                    <div class="label_help_flex">
+                                        <strong>{sectionInfo.section.acbox__Header_Text__c} </strong>
+                                        <template lwc:if={sectionInfo.section.acbox__Description__c}>
+                                        <div class="label_help_position"><lightning-helptext 
+                                            content={sectionInfo.section.acbox__Description__c}></lightning-helptext></div>
+                                        </template>
+                                    </div>
+                                </div>
+                                <template for:each={sectionInfo.sectionDetails} for:item="fieldInfo">
+                                    <template if:true={fieldInfo.isRenderByDefault}>
+                                        <div class="col-12 col-md-6 margin-botton" data-colms={fieldInfo.colCount} key={fieldInfo.acbox__Field_API_Name__c}>
+                                            <template lwc:if={fieldInfo.isOutput}>
+                                                <lightning-record-edit-form record-id={obrecordId} key={fieldInfo.acbox__Field_API_Name__c} object-api-name={sectionInfo.section.acbox__Child_Object_Name__c}>
+                                                    <label for={fieldInfo.acbox__Field_API_Name__c} class="inputLabelBold" data-type={fieldInfo.acbox__Type__c} style={fieldInfo.acbox__Style_Class__c}> {fieldInfo.acbox__Label_Override__c}</label>
+                                                    <lightning-output-field field-name={fieldInfo.acbox__Field_API_Name__c} data-hidden={fieldInfo.acbox__Is_Hidden__c} variant="label-hidden" data-type={fieldInfo.acbox__Type__c} class="formField" style={fieldInfo.acbox__Style_Class__c}></lightning-output-field>
+                                                </lightning-record-edit-form>
+                                            </template>
+                                            <!-- toggle custom component start-->
+                                            <template lwc:elseif={fieldInfo.isToggleInput}>
+                                                <div class="label_help_flex">
+                                                    <label for={fieldInfo.acbox__Field_API_Name__c} class="inputLabel"> {fieldInfo.acbox__Label_Override__c}</label>
+                                                    <template lwc:if={fieldInfo.acbox__Help_Text__c}>
+                                                        <div class="label_help_position">
+                                                            <lightning-helptext content={fieldInfo.acbox__Help_Text__c}></lightning-helptext>
+                                                        </div>
+                                                    </template>
+                                                </div>
+                                                <!--template lwc:if={loadCustomCmp}-->
+                                                <c-ds_-portal-checkbox-toggle field-label={fieldInfo.acbox__Label_Override__c} disabled={fieldInfo.acbox__Is_Disable__c} ontoggleevent={handleToggleChange} fieldapi-name={fieldInfo.acbox__Field_API_Name__c} field-values={sObjects} field-type={fieldInfo.acbox__Field_type__c}
+                                                object-api-name={reqObjectName} has-change-effect={fieldInfo.acbox__Has_On_Change__c} changejsname={fieldInfo.acbox__On_Change_JS_Function__c} field-errormessage={fieldInfo.acbox__Error_Message__c}></c-ds_-portal-checkbox-toggle>
+                                                <!--/template-->
+                                            </template>
+                                            <template lwc:else>
+                                                <lightning-record-edit-form record-id={obrecordId} key={fieldInfo.acbox__Field_API_Name__c} object-api-name={sectionInfo.section.acbox__Child_Object_Name__c}>
+                                                    <div class="label_help_flex">
+                                                        <label for={fieldInfo.acbox__Field_API_Name__c} class="inputLabel">
+                                                            <abbr class="slds-required" title="required" if:true={fieldInfo.acbox__Is_required__c}>*</abbr> {fieldInfo.acbox__Label_Override__c} </label>
+                                                        <template lwc:if={fieldInfo.acbox__Help_Text__c}>
+                                                            <div class="label_help_position">
+                                                                <lightning-helptext content={fieldInfo.acbox__Help_Text__c}></lightning-helptext>
+                                                            </div>
+                                                        </template>
+                                                    </div>
+                                                    <lightning-input-field field-name={fieldInfo.acbox__Field_API_Name__c} required={fieldInfo.acbox__Is_required__c} disabled={fieldInfo.acbox__Is_Disable__c} data-target-id={fieldInfo.acbox__Field_API_Name__c} id={fieldInfo.acbox__Field_API_Name__c} data-hidden={fieldInfo.acbox__Is_Hidden__c}
+                                                    value={fieldInfo.acbox__Default_Value__c} data-target-sr={fieldInfo.acbox__Has_On_Change__c} data-target-type={fieldInfo.acbox__Field_type__c} data-target-regex={fieldInfo.acbox__Pattern_Match__c} data-target-changejsfunction={fieldInfo.acbox__On_Change_JS_Function__c}
+                                                    class="overriddenCss formField" variant="label-hidden" onchange={handleInputValues} data-target-errormessage={fieldInfo.acbox__Error_Message__c} data-is-phone-field={fieldInfo.isPhoneInput}>
+                                                    </lightning-input-field>
+                                                </lightning-record-edit-form>
+                                            </template>
+                                            <template if:true={fieldInfo.hasError}>
+                                                <p class="redColor" key={fieldInfo.errorMessage}> {fieldInfo.errorMessage} </p>
+                                            </template>
+                                        </div>
+                                    </template>
+                                </template>
+                            </template>
+                        </template>
+                    </template>
+                    <!--/template-->
+                </lightning-layout-item>
+            </lightning-layout>
+            <div style="display: flex; justify-content: center;">
+                <!--template if:true={showUBOTypeSection}-->
+                <div style="padding: 10px;">
+                    <button class="details_start_button" onclick={handleFormSubmit}>Save</button>
+                </div>
+                <!--/template-->
+                <div style="padding: 10px;">
+                    <button class="details_start_button" onclick={handleFormCancel}>Cancel</button>
+                </div>
+            </div>
+        </template>
+        <!--/template-->
+    </div>
+</template>

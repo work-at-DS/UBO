@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomField xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>Commercial_Name_Arabic__c</fullName>
+    <description>Account_Name__r.Account_Arabic_Name__c</description>
+    <externalId>false</externalId>
+    <formula>&apos;s&apos;</formula>
+    <label>Current Commercial Name (Arabic)</label>
+    <required>false</required>
+    <trackHistory>false</trackHistory>
+    <trackTrending>false</trackTrending>
+    <type>Text</type>
+    <unique>false</unique>
+</CustomField>

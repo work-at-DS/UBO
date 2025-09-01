@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomField xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>Name_Formula__c</fullName>
+    <externalId>false</externalId>
+    <formula>IF( RecordType.Name = &apos;Individual&apos;,  Full_Name__c , IF( RecordType.Name = &apos;Corporate&apos;  &amp;&amp; TEXT(DACC_Registered__c) = &apos;YES&apos;,Corporate_Account__r.Name, IF(RecordType.Name = &apos;Corporate&apos;  &amp;&amp; TEXT(DACC_Registered__c) != &apos;Yes&apos;,Company_Name__c, &apos;&apos;) ) )</formula>
+    <formulaTreatBlanksAs>BlankAsZero</formulaTreatBlanksAs>
+    <label>Name</label>
+    <required>false</required>
+    <trackHistory>false</trackHistory>
+    <trackTrending>false</trackTrending>
+    <type>Text</type>
+    <unique>false</unique>
+</CustomField>

@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomField xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>DCAA_Criteria_1_Match__c</fullName>
+    <externalId>false</externalId>
+    <formula>OR(
+ISPICKVAL(DCAA_Current_Status__c ,&apos;&apos;),
+ISPICKVAL(DCAA_Current_Status__c, &apos;Missing Data in Salesforce&apos;),
+ISPICKVAL(DCAA_Current_Status__c, &apos;Get Company Callout Error&apos;),
+ISPICKVAL(DCAA_Current_Status__c, &apos;Wrong Response Code&apos;)
+)</formula>
+    <formulaTreatBlanksAs>BlankAsZero</formulaTreatBlanksAs>
+    <label>DCAA Criteria 1 Match?</label>
+    <trackHistory>false</trackHistory>
+    <trackTrending>false</trackTrending>
+    <type>Checkbox</type>
+</CustomField>

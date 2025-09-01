@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ListView xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>Freelancer_Requests</fullName>
+    <columns>NAME</columns>
+    <columns>Action_Template__c</columns>
+    <columns>Request_Category_License__c</columns>
+    <columns>Establishment_Card_Required__c</columns>
+    <columns>Establishment_Category__c</columns>
+    <columns>Status__c</columns>
+    <columns>CREATED_DATE</columns>
+    <columns>Account_Name__c</columns>
+    <filterScope>Everything</filterScope>
+    <filters>
+        <field>Action_Template__c</field>
+        <operation>equals</operation>
+        <value>Freelancer Registration</value>
+    </filters>
+    <label>Freelancer Requests</label>
+</ListView>

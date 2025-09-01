@@ -1,0 +1,70 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomField xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>DCAA_Current_Status__c</fullName>
+    <externalId>false</externalId>
+    <label>DCAA Current Status</label>
+    <required>false</required>
+    <trackHistory>false</trackHistory>
+    <trackTrending>false</trackTrending>
+    <type>Picklist</type>
+    <valueSet>
+        <valueSetDefinition>
+            <sorted>false</sorted>
+            <value>
+                <fullName>Company Exists</fullName>
+                <default>false</default>
+                <label>Company Exists</label>
+            </value>
+            <value>
+                <fullName>Company Not Exists</fullName>
+                <default>false</default>
+                <label>Company Not Exists</label>
+            </value>
+            <value>
+                <fullName>Documents upload Callout Error</fullName>
+                <default>false</default>
+                <label>Documents upload Callout Error</label>
+            </value>
+            <value>
+                <fullName>Documents upload Success</fullName>
+                <default>false</default>
+                <label>Documents upload Success</label>
+            </value>
+            <value>
+                <fullName>Get Company Callout Error</fullName>
+                <default>false</default>
+                <label>Get Company Callout Error</label>
+            </value>
+            <value>
+                <fullName>Missing Data in Salesforce</fullName>
+                <default>false</default>
+                <label>Missing Data in Salesforce</label>
+            </value>
+            <value>
+                <fullName>Permit Issued</fullName>
+                <default>false</default>
+                <label>Permit Issued</label>
+            </value>
+            <value>
+                <fullName>Permit Request Callout Error</fullName>
+                <default>false</default>
+                <label>Permit Request Callout Error</label>
+            </value>
+            <value>
+                <fullName>Permit Request Success</fullName>
+                <default>false</default>
+                <label>Permit Request Success</label>
+            </value>
+            <value>
+                <fullName>Save New Company Callout Error</fullName>
+                <default>false</default>
+                <label>Save New Company Callout Error</label>
+            </value>
+            <value>
+                <fullName>Save New Company Success</fullName>
+                <default>false</default>
+                <label>Save New Company Success</label>
+            </value>
+        </valueSetDefinition>
+    </valueSet>
+</CustomField>

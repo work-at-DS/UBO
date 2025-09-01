@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomField xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>Applicant_Full_Name__c</fullName>
+    <description>dummy Freezone request field created to skip errors in payment page</description>
+    <externalId>false</externalId>
+    <formula>Applicant_First_Name__c +&apos; &apos;+ Applicant_Last_Name__c</formula>
+    <label>Applicant Full Name</label>
+    <required>false</required>
+    <trackHistory>false</trackHistory>
+    <trackTrending>false</trackTrending>
+    <type>Text</type>
+    <unique>false</unique>
+</CustomField>
